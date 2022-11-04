@@ -1,11 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const connection = require('./DAL/Connection');
 const app = express();
-const PORT = 3000;
+require('dotenv').config();
 
-app.get('/',(req, res) => {
-    res.send('HELLO WORLD :)');
+//--------------------Connection to DataBase-----------------------------
+connection();
+//------------------Running Server------------------ -------
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`listening on port ${process.env.PORT || 3000}`);
 })
 
-app.listen(PORT,()=>{
-    console.log(`listening on port ${PORT}`);
-})
