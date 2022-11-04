@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const productSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: 'string',
         required: true,
@@ -26,5 +26,8 @@ const productSchema = new mongoose.Schema({
         required: true,
         length:60,
     },
-    
+
 })
+
+const UserModel = mongoose.model('UserModel',userSchema);
+module.exports = UserModel;
