@@ -58,7 +58,7 @@ const controller = {
             res.status(404).send({ message: 'Title is required' });
         }
         else {
-          
+
             //get product without filter
             productRepo.getProductsByTitle(title, filters)
                 .then((products) => {
@@ -72,9 +72,7 @@ const controller = {
 
         }
     },
-    searchProductsByTitleWithFilter: (req, res) => {
 
-    }
 }
 
 module.exports = controller;
