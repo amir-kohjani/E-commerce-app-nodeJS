@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
-const ColorModel = require('./colorModel');
+const ColorSchema = require('./ColorSchema');
 const productSchema = new mongoose.Schema({
     id: {
-        type: 'string',
-        required: true
+        type: String,
+        required: true,
+        unique: true,
+
     },
     title: {
-        type: 'string',
+        type: String,
         required: true,
+
         minLength: 10,
-        maxLength: 100
+        maxLength: 100,
+
     },
     category: [{
         type: String,
@@ -49,7 +53,7 @@ const productSchema = new mongoose.Schema({
         type: "string",
         required: true,
     },
-    colors: { type: [ColorModel], required: true },
+    colors: { type: [ColorSchema], required: true },
     sizes: {
         type: "string",
         required: true,
@@ -65,6 +69,9 @@ const productSchema = new mongoose.Schema({
     updated: { type: Date, default: Date.now }
 
 })
+// productSchema.methods.getProductsByCategory = function getProductsByCategory(category){
+    
+// }
 // productSchema.methods.setDiscount = function setDiscount() {
 //     this.priceWithDiscount = this.discount ? this.price - ((this.price * this.discount) / 100) : null
 // }
