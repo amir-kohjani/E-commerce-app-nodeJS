@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const AddressSchema = require('./addressSchema');
+const AddressSchema = require('./AddressSchema');
 const shortUniqId = require("short-unique-id")
 const uid = new shortUniqId({
     dictionary: 'number',
