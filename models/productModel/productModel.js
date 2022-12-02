@@ -1,11 +1,21 @@
+const uniqueValidator = require('mongoose-unique-validator');
+const shortUniqId = require('short-unique-id')
 const mongoose = require('mongoose');
 const ColorSchema = require('./ColorSchema');
+
+const uid = new  shortUniqId({
+    dictionary:'number',
+    length:6
+});
+
 const productSchema = new mongoose.Schema({
     id: {
         type: String,
         required: true,
         unique: true,
-
+        minLength:6,
+        maxLength:6,
+        default:()=>uid()
     },
     title: {
         type: String,
@@ -41,10 +51,6 @@ const productSchema = new mongoose.Schema({
         },
 
     },
-    img: {
-        type: "string",
-        required: true,
-    },
     desc: {
         type: "string",
         required: true,
@@ -54,11 +60,7 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     colors: { type: [ColorSchema], required: true },
-    sizes: {
-        type: "string",
-        required: true,
-        enum: ["XS", "S", "M", "L", "XL"]
-    },
+   
 
     stock: {
         type: "boolean",
@@ -69,6 +71,8 @@ const productSchema = new mongoose.Schema({
     updated: { type: Date, default: Date.now }
 
 })
+
+productSchema.plugin(uniqueValidator);
 // productSchema.methods.getProductsByCategory = function getProductsByCategory(category){
     
 // }

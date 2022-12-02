@@ -16,30 +16,54 @@ const controller = {
             })
     },
     getProductsByCategory: (req, res) => {
-        const category = req?.body?.category || null
-        if (!category) {
-            res.status(404).send({ message: 'Category is required' });
-        }
-        //get Products
-        productRepo.getProductsByCategoriy(category)
-            .then((products) => {
-                res.status(200).send({ products: products });
-            })
-            .catch((e) => {
 
-                res.status(500).send({ message: 'someThing is worng!!' })
-            })
+        const category = req?.query?.category || null
+        const color = req?.query?.color || null;
+        const size = req?.query?.size || null;
+        if (category == null) {
+            res.status(404).send({ message: 'Category is required' });
+        } else
+        //get Products
+        {
+            
+            productRepo.getProductsByCategoriy(category,color,size)
+                .then((products) => {
+                    res.status(200).send({ products: products });
+                })
+                .catch((e) => {
+
+                    res.status(500).send({ message: 'someThing is worng!!' })
+                })
+        }
+    },
+    getProductsBySuggest: (req, res) => {
+
+        const category = req?.query?.category || null
+        // const category = req?.body?.category || null
+       
+        if (category == null) {
+            res.status(404).send({ message: 'Category is required' });
+        } else
+        //get Products
+        {
+            productRepo.getProductsBySuggest(category)
+                .then((products) => {
+                    res.status(200).send({ products: products });
+                })
+                .catch((e) => {
+
+                    res.status(500).send({ message: 'someThing is worng!!' })
+                })
+        }
     },
     getProductById: (req, res) => {
-
-        if (!req.body.Id) {
+        const productId = req?.query?.Id || null
+        if (productId == null) {
             res.status(404).send({ message: 'ID is required' });
         }
-
         //get product
         else {
-            const Id = req.body.Id;
-            productRepo.getProductById(Id)
+            productRepo.getProductById(productId)
                 .then((product) => {
                     res.status(200).send({ product: product });
 
