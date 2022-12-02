@@ -4,10 +4,6 @@ const itemCartSchema = new Schema({
     id: {
         type: String,
         required: true,
-        unique: true,
-        minLength: 6,
-        maxLength: 6,
-        default: () => uid()
     },
     title: {
         type: String,

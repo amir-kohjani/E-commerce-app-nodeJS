@@ -1,8 +1,8 @@
 // const redisClient = require('../Redis')
 const redis = require('redis')
 const userRepo = require('../DAL/user.repo')
-const REDIS_PORT = process.env.PORT || 6379;
-const redisClient = redis.createClient(REDIS_PORT);
+const REDIS_URL = process.env.REDIS_URL || 6379;
+const redisClient = redis.createClient({url:REDIS_URL});
 
 
 const genRandomCode = () => {
