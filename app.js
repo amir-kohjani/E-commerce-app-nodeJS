@@ -9,6 +9,7 @@ const productRouter = require('./routers/productsRouter')
 const authRouter = require('./routers/authRouter')
 const userRouter = require('./routers/userRouter')
 const cartRouter = require('./routers/cartRouter');
+const wishListRouter = require('./routers/wishListRouter');
 
 
 //----------------Middlewares----------------------
@@ -24,6 +25,7 @@ app.use('/product',productRouter)
 app.use('/auth',authRouter);
 app.use('/user',userRouter);
 app.use('/cart',cartRouter);
+app.use('/wishList',wishListRouter);
 //------------------Running Server------------------ -------
 app.listen(process.env.PORT || 3000, () => {
     console.log(`listening on port ${process.env.PORT || 3000}`);
