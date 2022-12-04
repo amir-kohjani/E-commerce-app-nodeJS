@@ -4,7 +4,6 @@ const userRepo = require('../DAL/user.repo')
 const REDIS_URL = process.env.REDIS_URL || 6379;
 const redisClient = redis.createClient({url:REDIS_URL});
 
-
 const genRandomCode = () => {
 
     const code = Math.floor(Math.random() * 9999);
