@@ -1,21 +1,23 @@
 const uniqueValidator = require('mongoose-unique-validator');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const shortUniqId = require('short-unique-id')
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const ColorSchema = require('./ColorSchema');
 
-const uid = new  shortUniqId({
-    dictionary:'number',
-    length:6
+const uid = new shortUniqId({
+    dictionary: 'number',
+    length: 6
 });
 
-const productSchema = new mongoose.Schema({
+const ProductSchema = new Schema({
     id: {
         type: String,
         required: true,
         unique: true,
-        minLength:6,
-        maxLength:6,
-        default:()=>uid()
+        minLength: 6,
+        maxLength: 6,
+        default: () => uid()
     },
     title: {
         type: String,
@@ -60,7 +62,7 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     colors: { type: [ColorSchema], required: true },
-   
+
 
     stock: {
         type: "boolean",
@@ -71,14 +73,8 @@ const productSchema = new mongoose.Schema({
     updated: { type: Date, default: Date.now }
 
 })
-
-productSchema.plugin(uniqueValidator);
-// productSchema.methods.getProductsByCategory = function getProductsByCategory(category){
-    
-// }
-// productSchema.methods.setDiscount = function setDiscount() {
-//     this.priceWithDiscount = this.discount ? this.price - ((this.price * this.discount) / 100) : null
-// }
-const ProductModel = mongoose.model('Product', productSchema);
+ProductSchema.plugin(uniqueValidator);
+ProductSchema.plugin(mongoosePaginate);
+const ProductModel = mongoose.model('Product', ProductSchema);
 
 module.exports = ProductModel;

@@ -17,18 +17,24 @@ const controller = {
     },
     getProductsByCategory: (req, res) => {
 
-        const category = req?.query?.category || null
-        const color = req?.query?.color || null;
-        const size = req?.query?.size || null;
-        if (category == null) {
+        const query = {
+            ...req?.query?.category ? { 'category': req?.query?.category } : {},
+            ...req?.query?.color ? { 'color':req?.query?.color } : {},
+            ...req?.query?.size ? { 'size': req?.query?.size } : {},
+            ...req?.query?.page ? { 'page': req?.query?.page } : {},
+            ...req?.query?.sort ? { 'sort': req?.query?.sort } : {}
+        }
+
+        if (query == null) {
             res.status(404).send({ message: 'Category is required' });
         } else
         //get Products
         {
-            
-            productRepo.getProductsByCategoriy(category,color,size)
+
+            productRepo.getProductsByCategoriy(query)
                 .then((products) => {
-                    res.status(200).send({ products: products });
+                   
+                    res.status(200).send({ products: products});
                 })
                 .catch((e) => {
 
@@ -40,7 +46,7 @@ const controller = {
 
         const category = req?.query?.category || null
         // const category = req?.body?.category || null
-       
+
         if (category == null) {
             res.status(404).send({ message: 'Category is required' });
         } else
