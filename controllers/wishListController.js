@@ -27,7 +27,7 @@ const controller = {
         }
     },
     addItemToWishListByUserId: async (req, res) => {
-        const userId = req?.query?.userId || null;
+        const userId = req?.body?.userId || null;
         const item = req?.body?.item || null;
         if (userId == null || item == null) {
             res.status(400).send({ message: 'شناسه کاربر باید وارد شود و آیتم باید وارد شود!', isError: true })
@@ -51,8 +51,9 @@ const controller = {
         }
     },
     removeItemfromWishListByUserId:async (req, res) => {
-        const userId = req?.query?.userId || null;
+        const userId = req?.body?.userId || null;
         const item = req?.body?.item || null;
+ 
         if (userId == null || item == null) {
             res.status(400).send({ message: 'شناسه کاربر باید وارد شود و آیتم باید وارد شود!', isError: true })
         }
