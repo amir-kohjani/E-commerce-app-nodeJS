@@ -36,6 +36,23 @@ const controller = {
 
             }
         }
+    },
+    removeItemFromCartByUserId: async (req, res) => {
+        const userId = req?.body?.userId || null;
+        const item = req?.body?.item || null;
+     
+        if (userId == null) {
+            res.status(400).send({ message: 'شناسه کاربر باید وارد شود!', isError: true })
+        } else {
+            const cart = await cartRepo.findCartByUserId(userId);
+            if (!cart) {
+                res.status(400).send({ message: 'سبد خرید با این مشخصات یافت نشده!', isError: true })
+            } else {
+                const cartUpdated = await cartRepo.removeItemByUserId(userId, item);
+                res.status(200).send({ ...cartUpdated, isError: false });
+
+            }
+        }
     }
 }
 

@@ -1,32 +1,39 @@
-const { Schema,model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 const shortUniqId = require('short-unique-id');
 const itemCartSchema = require('./itemCartSchema');
 
 
-const uid = new  shortUniqId({
-    dictionary:'number',
-    length:6
+const uid = new shortUniqId({
+    dictionary: 'number',
+    length: 6
 });
 const CartSchema = new Schema({
-    id:{
+    id: {
         type: String,
         required: true,
-        default:()=>uid()
+        default: () => uid()
     },
-    userId:{
+    userId: {
         type: String,
         required: true,
     },
-    itemList:{
-        type:[itemCartSchema],
-        default:[]
+    itemList: {
+        type: [itemCartSchema],
+        default: []
     },
-    totalPrice:{
+    totalPrice: {
         type: Number,
-        default:0
+        default: 0
     }
 })
 
-const CartModel = model('Carts',CartSchema);
+CartSchema.methods.removeItem = function (removedItem) {
+    this.itemList = this.itemList.filter(function (item) {
+        return item.id != removedItem.id;
+    })
+    return this.itemList;
+}
+
+const CartModel = model('Carts', CartSchema);
 
 module.exports = CartModel;
