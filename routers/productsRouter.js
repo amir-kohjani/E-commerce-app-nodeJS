@@ -5,7 +5,7 @@ const productController = require('../controllers/productController');
 router.get('/',(req, res) => {
     console.log('test connection')
     res.status(200).send(
-       {test:"safe"}
+       {test:"successful"}
     )
 });
 router.get('/test',(req, res) => {
