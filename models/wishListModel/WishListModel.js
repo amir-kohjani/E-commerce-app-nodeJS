@@ -11,12 +11,12 @@ const WishlistSchema = new Schema({
     id: {
         type: String,
         required: true,
-        unique: true,
+      
         default: () => uid()
     },
     userId: {
         type: String,
-        unique: true,
+    
         required: true,
     },
     itemList: {

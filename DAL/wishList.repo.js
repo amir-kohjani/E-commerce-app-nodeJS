@@ -2,7 +2,8 @@ const WishListModel = require('../models/wishListModel/WishListModel')
 
 const repo = {
     create: async (userId) => {
-        const newWishList = new WishListModel({ userId });
+
+        const newWishList =  new  WishListModel({ userId });
         await newWishList.save();
         return newWishList;
     },
