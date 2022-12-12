@@ -76,7 +76,7 @@ const controller = {
                     if (user) {
                         const token = await userRepo.genToken(user);
                         delete user.tokens;
-                        
+                        console.log(`${phone} : ${curentCode}`);
                         res.status(200).send({ ...user, isError: false });
                         //user exists
                     } else if (user == null) {
@@ -86,6 +86,7 @@ const controller = {
                                 const token = await userRepo.genToken(newUser);
                                 delete newUser.tokens;
                                 newUser.token = token;
+                                console.log(`${phone} : ${curentCode}`);
                                 res.status(200).send({ ...newUser, isError: false });
                             })
                             .catch((error) => {
